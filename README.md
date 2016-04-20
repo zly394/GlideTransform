@@ -1,13 +1,12 @@
-﻿### 一、添加Glide依赖
+﻿### 一、图片转换形状原理
 
-```
+设置Paint的Xfermode（相交模式），来设置两张图片相交时的显示方式
 
-dependencies {
-   compile 'com.android.support:support-v4:23.3.0'
-   compile 'com.github.bumptech.glide:glide:3.7.0'
-}
+PorterDuffXfermode是Xfermode的子类，是一个很强大的转换模式，共有16种模式，如下图所示，其中黄色圆图为下层图片，蓝色方图为上层图片。具体可以查看Android ApiDemos，[Android Studio导入Samples方法](http://developer.android.com/intl/zh-cn/samples/index.html)
 
-```
+![proter_duff_mode](proter_duff_mode.jpg)
+
+**利用这种图片相交转换方式，可以实现任意形状图片的转换**
 
 ### 二、继承BitmapTransformation自定义图片变换类
 
