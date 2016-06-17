@@ -17,29 +17,27 @@ public class MainActivity extends AppCompatActivity {
         String url2 = "http://upload.520apk.com/news/20141120/14164605934616.jpg";
 //        String url2 = "http://img3.redocn.com/20140822/201408010512517866403921.jpg";
 
-        Glide.with(this).load(url1)
-                .into((ImageView) findViewById(R.id.ivOriginal1));
+        Glide.with(this).load(url1).into((ImageView) findViewById(R.id.ivOriginal1));
 
         Glide.with(this).load(url1)
-                .transform(new CustomShapeTransformation(this, R.drawable.shape_star)).into((ImageView) findViewById(R.id.ivStar1));
+                .bitmapTransform(new CustomShapeTransformation(this, R.drawable.shape_star)).into((ImageView) findViewById(R.id.ivStar1));
 
         Glide.with(this).load(url1)
-                .transform(new CustomShapeTransformation(this, R.drawable.shape_hexagon)).into((ImageView) findViewById(R.id.ivHexagon1));
+                .bitmapTransform(new CustomShapeTransformation(this, R.drawable.shape_hexagon)).into((ImageView) findViewById(R.id.ivHexagon1));
 
         Glide.with(this).load(url1)
-                .transform(new CustomShapeTransformation(this, R.drawable.shape_cloud)).into((ImageView) findViewById(R.id.ivCloud1));
+                .bitmapTransform(new CustomShapeTransformation(this, R.drawable.shape_cloud)).into((ImageView) findViewById(R.id.ivCloud1));
+
+        Glide.with(this).load(url2).into((ImageView) findViewById(R.id.ivOriginal2));
 
         Glide.with(this).load(url2)
-                .into((ImageView) findViewById(R.id.ivOriginal2));
+                .bitmapTransform(new CustomShapeTransformation(this, R.drawable.shape_star)).into((ImageView) findViewById(R.id.ivStar2));
 
         Glide.with(this).load(url2)
-                .transform(new CustomShapeTransformation(this, R.drawable.shape_star)).into((ImageView) findViewById(R.id.ivStar2));
+                .bitmapTransform(new CustomShapeTransformation(this, R.drawable.shape_hexagon)).into((ImageView) findViewById(R.id.ivHexagon2));
 
         Glide.with(this).load(url2)
-                .transform(new CustomShapeTransformation(this, R.drawable.shape_hexagon)).into((ImageView) findViewById(R.id.ivHexagon2));
-
-        Glide.with(this).load(url2)
-                .transform(new CustomShapeTransformation(this, R.drawable.shape_cloud)).into((ImageView) findViewById(R.id.ivCloud2));
+                .bitmapTransform(new CustomShapeTransformation(this, R.drawable.shape_cloud)).into((ImageView) findViewById(R.id.ivCloud2));
 
     }
 }

@@ -18,7 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
  */
 public class CustomShapeTransformation extends BitmapTransformation {
 
-    private Paint mPaint; // 画笔
+    private static Paint mPaint = new Paint(); // 画笔
     private Context mContext;
     private int mShapeRes; // 形状的drawable资源
 
@@ -27,7 +27,6 @@ public class CustomShapeTransformation extends BitmapTransformation {
         mContext = context;
         mShapeRes = shapeRes;
         // 实例化Paint对象，并设置Xfermode为SRC_IN
-        mPaint = new Paint();
         mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
     }
 
@@ -51,7 +50,7 @@ public class CustomShapeTransformation extends BitmapTransformation {
         }
 
         // 居中裁剪图片，调用Glide库中TransformationUtils类的centerCrop()方法完成裁剪，保证图片居中且填满
-        final Bitmap toReuse = pool.get(outWidth, outHeight, toTransform.getConfig() != null
+        final Bitmap toReuse = pool.get(width, height, toTransform.getConfig() != null
                 ? toTransform.getConfig() : Bitmap.Config.ARGB_8888);
         Bitmap transformed = TransformationUtils.centerCrop(toReuse, toTransform, width, height);
         if (toReuse != null && toReuse != transformed && !pool.put(toReuse)) {
@@ -59,7 +58,10 @@ public class CustomShapeTransformation extends BitmapTransformation {
         }
 
         // 根据算出的宽高新建Bitmap对象并设置到画布上
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = pool.get(width, height, Bitmap.Config.ARGB_8888);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        }
         Canvas canvas = new Canvas(bitmap);
         // 设置形状的大小与图片的大小一致
         shape.setBounds(0, 0, width, height);
